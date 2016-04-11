@@ -49,4 +49,36 @@ class Funcionarios extends CI_Controller {
 		$this->load->view('funcionarios', $data);
 		$this->load->view('parte2', $data);
 	}
+
+	public function cadastrar()
+	{
+		// Verificando Login
+		$this->load->model('Login_model');
+		$this->Login_model->verifica();
+
+		// Resgatando os dados do Usuário
+		$user = $this->session->userdata('user');
+
+		$data = array();
+		$data['user'] = $user->nome;
+		$data['base_url'] = base_url();
+
+		// // Carregando model Empresa
+		// $this->load->model('Empresa_model');
+
+		// // Foi submetido um form para a propia pagina
+  	//   $form = $this->input->post();
+	  //   if( !empty($form) )
+	  //   {
+	  //     $data['result'] = $this->Empresa_model->editar($form);     
+	  //   }
+
+		// // Buscando os dados da Empresa caso existam
+		// $data['empresa'] = $this->Empresa_model->get_empresa();
+
+		// Carregando os Views
+		$this->load->view('parte1', $data);
+		$this->load->view('funcionarios_cadastrar', $data);
+		$this->load->view('parte2', $data);
+	}
 }
